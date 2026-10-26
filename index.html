@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculadora de promedio de notas para estudiantes.">
+  <title>Task | Promedio de Notas</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">✓</div>
+      <div>
+        <div class="brand-name">Task</div>
+        <div class="tagline">Organiza · Calcula · Avanza</div>
+      </div>
+    </div>
+
+    <nav aria-label="Navegación principal">
+      <button class="nav-item active" data-page="inicio">
+        <span class="nav-icon">⌂</span>Inicio
+      </button>
+      <button class="nav-item" data-page="tareas">
+        <span class="nav-icon">☷</span>Mis tareas
+      </button>
+      <button class="nav-item" data-page="promedio">
+        <span class="nav-icon">▥</span>Promedio de notas
+      </button>
+      <button class="nav-item" data-page="configuracion">
+        <span class="nav-icon">⚙</span>Configuración
+      </button>
+    </nav>
+
+    <div class="sidebar-note">
+      <div class="sparkle">✧</div>
+      Tu esfuerzo<br>también cuenta<br>
+      <span style="color:#8e83ff">━━━━</span>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <h1 id="page-title">Task</h1>
+      <div class="avatar" aria-label="Perfil de usuario">●</div>
+    </header>
+
+    <!-- INICIO: CALCULADORA -->
+    <section class="page active" id="page-inicio">
+      <div class="main-card">
+        <div class="intro">
+          <div class="intro-icon" aria-hidden="true">▦</div>
+          <div>
+            <h2>Promedio de Notas</h2>
+            <p>Ingresa las notas del estudiante y calcula su promedio de forma rápida y sencilla.</p>
+          </div>
+        </div>
+
+        <form class="form-panel" id="average-form">
+          <div class="field">
+            <label for="student-name">Nombre del estudiante</label>
+            <input
+              id="student-name"
+              type="text"
+              value="Ana Gómez"
+              placeholder="Ej. Ana Gómez"
+              maxlength="100"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label class="grades-label">
+              Notas
+              <span style="color:#91a5ca;font-weight:500">
+                (escala de 0 a 5)
+              </span>
+            </label>
+
+            <div id="grades">
+              <div class="grade-row">
+                <input aria-label="Nota 1" type="number" min="0" max="5" step="0.1" value="4.5" required>
+                <button class="remove-grade" type="button" aria-label="Eliminar nota">×</button>
+              </div>
+              <div class="grade-row">
+                <input aria-label="Nota 2" type="number" min="0" max="5" step="0.1" value="3.8" required>
+                <button class="remove-grade" type="button" aria-label="Eliminar nota">×</button>
+              </div>
+              <div class="grade-row">
+                <input aria-label="Nota 3" type="number" min="0" max="5" step="0.1" value="5.0" required>
+                <button class="remove-grade" type="button" aria-label="Eliminar nota">×</button>
+              </div>
+              <div class="grade-row">
+                <input aria-label="Nota 4" type="number" min="0" max="5" step="0.1" value="4.2" required>
+                <button class="remove-grade" type="button" aria-label="Eliminar nota">×</button>
+              </div>
+            </div>
+
+            <button class="secondary" type="button" id="add-grade">
+              ＋ &nbsp; Agregar otra nota
+            </button>
+            <p class="message" id="form-message" role="alert" hidden></p>
+          </div>
+
+          <button class="primary" type="submit">
+            ▦ &nbsp; Calcular promedio
+          </button>
+        </form>
+
+        <section class="result" aria-live="polite">
+          <div class="result-icon" aria-hidden="true">🎓</div>
+          <div>
+            <div class="result-label" id="result-label">Promedio de Ana Gómez</div>
+            <div class="result-value" id="result-value">4.38</div>
+            <div class="result-meta" id="result-meta">4 notas registradas</div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- PÁGINA DE PROMEDIOS -->
+    <section class="page" id="page-promedio">
+      <div class="main-card">
+        <div class="intro">
+          <div class="intro-icon">▦</div>
+          <div>
+            <h2>Promedio de Notas</h2>
+            <p>Calcula el promedio aritmético de las calificaciones ingresadas.</p>
+          </div>
+        </div>
+        <p>Usa el formulario de Inicio para agregar, quitar o editar notas y obtener el resultado actualizado.</p>
+        <button class="primary" type="button" data-go-home>
+          Ir al calculador
+        </button>
+      </div>
+    </section>
+
+    <!-- PÁGINA DE TAREAS -->
+    <section class="page" id="page-tareas">
+      <div class="simple-panel">
+        <h2>Mis tareas</h2>
+        <p style="color:var(--muted)">Agrega tareas y marca las que ya terminaste.</p>
+
+        <form id="task-form" style="display:flex;gap:10px;margin-bottom:18px">
+          <input
+            id="task-input"
+            type="text"
+            placeholder="Escribe una tarea..."
+            maxlength="140"
+            required
+          >
+          <button
+            class="primary"
+            style="width:auto;white-space:nowrap;margin:0;padding:12px 18px"
+            type="submit"
+          >Agregar</button>
+        </form>
+
+        <div id="task-list"></div>
+      </div>
+    </section>
+
+    <!-- PÁGINA DE CONFIGURACIÓN -->
+    <section class="page" id="page-configuracion">
+      <div class="simple-panel">
+        <h2>Configuración</h2>
+        <p style="color:var(--muted)">Personaliza algunos detalles del calculador.</p>
+
+        <label class="setting-row" for="decimal-setting">
+          Decimales del promedio
+          <select
+            id="decimal-setting"
+            style="background:#1c2b44;color:var(--text);border:1px solid #3b5278;border-radius:10px;padding:8px"
+          >
+            <option value="1">1 decimal</option>
+            <option value="2" selected>2 decimales</option>
+            <option value="3">3 decimales</option>
+          </select>
+        </label>
+
+        <label class="setting-row" for="pass-setting">
+          Nota mínima para aprobar
+          <input
+            id="pass-setting"
+            type="number"
+            min="0"
+            max="5"
+            step="0.1"
+            value="3.0"
+            style="max-width:110px"
+          >
+        </label>
+
+        <p style="color:var(--muted);font-size:14px">
+          Los cambios se aplican al próximo cálculo.
+        </p>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
